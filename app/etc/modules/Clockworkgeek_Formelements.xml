@@ -1,0 +1,8 @@
+<config>
+   <modules>
+      <Clockworkgeek_Formelements>
+         <active>true</active>
+         <codePool>community</codePool>
+      </Clockworkgeek_Formelements>
+   </modules>
+</config>

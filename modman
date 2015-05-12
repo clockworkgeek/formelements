@@ -1,0 +1,5 @@
+app/code/community/Clockworkgeek/Formelements app/code/community/Clockworkgeek/Formelements
+app/design/adminhtml/default/default/layout/clockworkgeek/formelements.xml app/design/adminhtml/default/default/layout/clockworkgeek/formelements.xml
+app/etc/modules/Clockworkgeek_Formelements.xml app/etc/modules/Clockworkgeek_Formelements.xml
+js/clockworkgeek/formelements.js js/clockworkgeek/formelements.js
+lib/Clockworkgeek/Data lib/Clockworkgeek/Data

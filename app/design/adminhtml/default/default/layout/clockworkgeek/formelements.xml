@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <editor>
+        <reference name="head">
+            <action method="addJs"><script>clockworkgeek/formelements.js</script></action>
+        </reference>
+    </editor>
+</layout>
