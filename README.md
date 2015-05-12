@@ -22,6 +22,6 @@ For composer enter:
     composer require clockworkgeek/formelements
 
 ## Instructions
-Please visit the wiki for decumentation:
+Please visit the wiki for documentation:
 
 > https://github.com/clockworkgeek/formelements/wiki
