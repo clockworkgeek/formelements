@@ -1,0 +1,16 @@
+{
+  "name":"clockworkgeek/formelements",
+  "type":"magento-module",
+  "license":"MIT",
+  "homepage":"https://github.com/clockworkgeek/formelements",
+  "description":"Adds HTML5 input types and some WYSIWYG features to admin forms and product attributes.",
+  "authors":[
+    {
+      "name":"Daniel Deady",
+      "email":"daniel@clockworkgeek.com"
+    }
+  ],
+  "suggest":{
+    "magento-hackathon/magento-composer-installer":"*"
+  }
+}
