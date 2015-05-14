@@ -28,4 +28,11 @@ SOFTWARE.
             <action method="addJs"><script>clockworkgeek/formelements.js</script></action>
         </reference>
     </editor>
+
+    <adminhtml_widget_instance_edit>
+        <update handle="editor" />
+        <reference name="head">
+            <action method="setCanLoadTinyMce"><value>true</value></action>
+        </reference>
+    </adminhtml_widget_instance_edit>
 </layout>
