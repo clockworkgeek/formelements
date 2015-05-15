@@ -23,12 +23,12 @@
  * SOFTWARE.
  */
 
-class Clockworkgeek_Formelements_Block_Adminhtml_Renderer_Fieldset_Element_Number
+class Clockworkgeek_Formelements_Block_Adminhtml_Renderer_Fieldset_Element_Color
 extends Clockworkgeek_Formelements_Block_Adminhtml_Renderer_Fieldset_Element_Abstract
 {
 
     public function getElementClass()
     {
-        return 'Clockworkgeek_Data_Form_Element_Number';
+        return 'Clockworkgeek_Data_Form_Element_Color';
     }
 }

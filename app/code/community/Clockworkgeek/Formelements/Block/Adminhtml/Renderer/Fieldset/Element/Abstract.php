@@ -23,12 +23,24 @@
  * SOFTWARE.
  */
 
-class Clockworkgeek_Formelements_Block_Adminhtml_Renderer_Fieldset_Element_Number
-extends Clockworkgeek_Formelements_Block_Adminhtml_Renderer_Fieldset_Element_Abstract
+abstract class Clockworkgeek_Formelements_Block_Adminhtml_Renderer_Fieldset_Element_Abstract
+extends Mage_Adminhtml_Block_Widget_Form_Renderer_Fieldset_Element
 {
 
-    public function getElementClass()
+    abstract public function getElementClass();
+
+    public function render(Varien_Data_Form_Element_Abstract $element)
     {
-        return 'Clockworkgeek_Data_Form_Element_Number';
+        $classname = $this->getElementClass();
+        Mage::log(__METHOD__.'('.get_class($element).')');
+        Mage::log($classname);
+
+        if (! ($element instanceof $classname)) {
+            $number = new $classname($element->getData());
+            $number->setForm($element->getForm());
+            $number->setId($element->getId());
+            $element = $number;
+        }
+        return parent::render($element);
     }
 }
