@@ -32,8 +32,6 @@ extends Mage_Adminhtml_Block_Widget_Form_Renderer_Fieldset_Element
     public function render(Varien_Data_Form_Element_Abstract $element)
     {
         $classname = $this->getElementClass();
-        Mage::log(__METHOD__.'('.get_class($element).')');
-        Mage::log($classname);
 
         if (! ($element instanceof $classname)) {
             $number = new $classname($element->getData());
