@@ -63,7 +63,8 @@ extends Varien_Data_Form_Element_Abstract
                     'file' => $helper->urlEncode($match[1])
                 )
             );
-            $html .= "<img src='{$previewUrl}' alt='{$match[1]}' />";
+            $disabledStyle = $disabled ? ' style="display:none;"' : '';
+            $html .= "<img src='{$previewUrl}' alt='{$match[1]}'{$disabledStyle} />";
         }
         $html .= "</div>";
         $html .= "<script type='text/javascript'>watchMediaUrl('{$htmlId}', '{$thumbnailUrl}');</script>";
