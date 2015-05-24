@@ -23,7 +23,7 @@
  * SOFTWARE.
  */
 
-class Clockworkgeek_Formelements_Model_Template_localdir extends Mage_Core_Model_Email_Template_Filter
+class Clockworkgeek_Formelements_Model_Template_Localdir extends Mage_Core_Model_Email_Template_Filter
 {
 
     public function mediaDirective($construction)
