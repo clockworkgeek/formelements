@@ -23,13 +23,84 @@
  * SOFTWARE.
  */
 
+/**
+ * Use instead of core/template and cms directives will be transformed for you.
+ * 
+ * Remember to <code>setCacheLifetime()</code> to take advantage of smart caching.
+ */
 class Clockworkgeek_Formelements_Block_Template extends Mage_Core_Block_Template
 {
 
     protected function _toHtml()
     {
         $html = parent::_toHtml();
-        $filter = Mage::getSingleton('widget/template_filter');
-        return $filter->filter($html);
+        $filter = Mage::getSingleton('cms/template_filter');
+        $html = $filter->filter($html);
+        // process widgets separately
+        $html = $this->filterWidgetDirectives($html);
+        return $html;
+    }
+
+    /**
+     * Collect widget cache tags and claim them as own.
+     * 
+     * Contained widgets are never child blocks nor declared in layout
+     * and that makes it difficult for FPC solutions to hole punch.
+     * By processing widgets manually we can mimic their cache tags
+     * which is important for dynamic content.
+     * 
+     * @param string $html
+     * @return string
+     */
+    public function filterWidgetDirectives($html)
+    {
+        $pattern = '/{{widget\b(.*?)}}/si';
+
+        $html = preg_replace_callback($pattern, function ($construction) {
+            $tokenizer = new Varien_Filter_Template_Tokenizer_Parameter();
+            $tokenizer->setString($construction[1]);
+            $params = $tokenizer->tokenize();
+
+            // Copied from Mage_Widget_Model_Template_Filter::widgetDirective...
+            // Determine what name block should have in layout
+            $name = null;
+            if (isset($params['name'])) {
+                $name = $params['name'];
+            }
+            
+            // validate required parameter type or id
+            if (!empty($params['type'])) {
+                $type = $params['type'];
+            } elseif (!empty($params['id'])) {
+                $preconfigured = Mage::getResourceSingleton('widget/widget')
+                ->loadPreconfiguredWidget($params['id']);
+                $type = $preconfigured['widget_type'];
+                $params = $preconfigured['parameters'];
+            } else {
+                return '';
+            }
+            
+            // we have no other way to avoid fatal errors for type like 'cms/widget__link', '_cms/widget_link' etc.
+            $xml = Mage::getSingleton('widget/widget')->getXmlElementByType($type);
+            if ($xml === null) {
+                return '';
+            }
+            
+            // define widget block and check the type is instance of Widget Interface
+            $widget = Mage::app()->getLayout()->createBlock($type, $name, $params);
+            if (!$widget instanceof Mage_Widget_Block_Interface) {
+                return '';
+            }
+
+            $tags = array_unique(array_merge(
+                $this->getCacheTags(),
+                $widget->getCacheTags()
+            ));
+            $this->setData(self::CACHE_TAGS_DATA_KEY, $tags);
+
+            return $widget->toHtml();
+        }, $html);
+
+        return $html;
     }
 }
