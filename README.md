@@ -21,6 +21,10 @@ For composer enter:
     composer config repositories.firegento composer http://packages.firegento.com
     composer require clockworkgeek/formelements
 
+For [Magento Connect](http://www.magentocommerce.com/magento-connect/html5-form-elements.html) use the key:
+
+    http://connect20.magentocommerce.com/community/Clockworkgeek_Formelements
+
 ## Instructions
 Please visit the wiki for documentation:
 
